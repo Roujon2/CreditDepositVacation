@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-
 export const postDepositSchema = z.object({
     guestName: z.string().min(1, 'Guest name is required'),
     guestEmail: z.string().email('Invalid email address'),
@@ -13,5 +12,7 @@ export const postDepositSchema = z.object({
     securityDeposit: z.number().positive('Security deposit must be a positive number'),
 });
 
+// Infer the TypeScript type for the schema
+export type PostDeposit = z.infer<typeof postDepositSchema>;
 
 export default postDepositSchema;

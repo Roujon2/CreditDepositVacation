@@ -7,3 +7,8 @@ export const postPaymentSchema = z.object({
     }),
     paymentMethodId: z.string().min(1, 'Payment method ID is required'),
 });
+
+// Infer the TypeScript type for the schema
+export type PostPayment = z.infer<typeof postPaymentSchema>;
+
+export default postPaymentSchema;

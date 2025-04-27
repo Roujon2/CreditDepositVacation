@@ -1,18 +1,20 @@
-import express from 'express';
-import AppError from '../errors/AppError.js';
-import { validateBody } from '../middleware/validation.js';
-import { postDepositSchema } from './schema/depositSchema.js';
-import { formatSuccessResponse } from '../utils/responseFormat.js';
+import express, { Request, Response, NextFunction } from 'express';
+import AppError from '../errors/AppError';
+import { validateBody } from '../middleware/validation';
+import { postDepositSchema } from './schema/depositSchema';
+import { formatSuccessResponse } from '../utils/responseFormat';
+import { Deposit } from '../types/deposit';
 
+
+// Initialize the router
 const depositRouter = express.Router();
 
 // Simulate database for now ----- TODO: Replace with actual database logic
-const deposits = [];
+const deposits: Deposit[] = [];
 let depositIdCounter = 1; // Simple counter for deposit IDs
 
-
 // ------ POST /api/v1/deposit ------
-depositRouter.post('/', validateBody(postDepositSchema), (req, res) => {
+depositRouter.post('/', validateBody(postDepositSchema), (req: Request, res: Response) => {
     try {
         // Extract data from the request body
         const { guestName, guestEmail, checkInDate, checkOutDate, securityDeposit } = req.body;
@@ -21,6 +23,7 @@ depositRouter.post('/', validateBody(postDepositSchema), (req, res) => {
         const today = new Date();
         const checkIn = new Date(checkInDate);
         const checkOut = new Date(checkOutDate);
+        
         if (checkIn >= checkOut) {
             throw new AppError(400, 'Check-out date must be after check-in date');
         }
@@ -37,34 +40,29 @@ depositRouter.post('/', validateBody(postDepositSchema), (req, res) => {
         }
 
         // Create a new deposit object
-        const newDeposit = {
+        const newDeposit: Deposit = {
             id: depositIdCounter++,
             guestName,
             guestEmail,
             checkInDate,
             checkOutDate,
-            securityDeposit,
-            paymentIntentId: null, // Placeholder for payment intent ID
-            paymentStatus: 'pending', // Placeholder for payment status
+            securityDeposit
         };
 
         // Simulate saving to the database
         deposits.push(newDeposit);
 
-
         // ---- Response ----
-        return formatSuccessResponse(res, 201, 'Deposit created successfully', { deposit_id: newDeposit.id });
+        formatSuccessResponse(res, 201, 'Deposit created successfully', { deposit_id: newDeposit.id });
 
     } catch (error) {
         throw error;
     }
 });
 
-
 // ------ GET /api/v1/deposit/:id ------
-depositRouter.get('/:id', (req, res) => {
+depositRouter.get('/:id', (req: Request, res: Response) => {
     try {
-        console.log(depositIdCounter);
         const depositId = parseInt(req.params.id, 10);
         const deposit = deposits.find(d => d.id === depositId);
 
@@ -73,18 +71,18 @@ depositRouter.get('/:id', (req, res) => {
         }
 
         // ---- Response ----
-        return formatSuccessResponse(res, 200, 'Deposit retrieved successfully', deposit);
+        formatSuccessResponse(res, 200, 'Deposit retrieved successfully', deposit);
 
     } catch (error) {
         throw error;
     }
-}); 
+});
 
 // ------ GET /api/v1/deposit ------
-depositRouter.get('/', (req, res) => {
+depositRouter.get('/', (req: Request, res: Response) => {
     try {
         // ---- Response ----
-        return formatSuccessResponse(res, 200, 'Deposits retrieved successfully', deposits);
+        formatSuccessResponse(res, 200, 'Deposits retrieved successfully', deposits);
 
     } catch (error) {
         throw error;

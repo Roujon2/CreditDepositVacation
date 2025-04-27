@@ -2,25 +2,39 @@
   "name": "creditdepositvacation",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server.ts",
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "nodemon",
+    "start": "tsx src/server.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mikro-orm/core": "^6.4.13",
+    "@mikro-orm/migrations": "^6.4.13",
+    "@mikro-orm/postgresql": "^6.4.13",
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "nodemon": "^3.1.10",
+    "reflect-metadata": "^0.2.2",
     "stripe": "^18.0.0",
     "supertest": "^7.1.0",
     "vitest": "^3.1.2",
     "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@mikro-orm/sqlite": "^6.4.13",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.15.2",
+    "sqlite3": "^5.1.7",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
   }
 }
