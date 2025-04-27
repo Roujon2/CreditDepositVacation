@@ -61,8 +61,7 @@ paymentRouter.post('/:depositId', validateBody(postPaymentSchema), async (req, r
         return formatSuccessResponse(res, 201, 'Payment created successfully', { payment_id: newPayment.id });
         
     } catch (error) {
-        // Handle Stripe errors
-        throw error
+        throw error;
     }
 });
 
@@ -81,7 +80,7 @@ paymentRouter.get('/:id', (req, res) => {
         return formatSuccessResponse(res, 200, 'Payment retrieved successfully', payment);
         
     } catch (error) {
-        throw error
+        throw error;
     }
 });
 // ------ GET /api/v1/payment ------
@@ -91,7 +90,7 @@ paymentRouter.get('/', (req, res) => {
         return formatSuccessResponse(res, 200, 'Payments retrieved successfully', payments);
         
     } catch (error) {
-        throw error
+        throw error;
     }
 });
 

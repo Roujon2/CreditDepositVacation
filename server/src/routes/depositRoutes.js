@@ -56,7 +56,7 @@ depositRouter.post('/', validateBody(postDepositSchema), (req, res) => {
         return formatSuccessResponse(res, 201, 'Deposit created successfully', { deposit_id: newDeposit.id });
 
     } catch (error) {
-        throw new AppError(500, 'Internal Server Error', error.message); 
+        throw error;
     }
 });
 
@@ -76,7 +76,7 @@ depositRouter.get('/:id', (req, res) => {
         return formatSuccessResponse(res, 200, 'Deposit retrieved successfully', deposit);
 
     } catch (error) {
-        throw new AppError(500, 'Internal Server Error', error.message); 
+        throw error;
     }
 }); 
 
@@ -87,7 +87,7 @@ depositRouter.get('/', (req, res) => {
         return formatSuccessResponse(res, 200, 'Deposits retrieved successfully', deposits);
 
     } catch (error) {
-        throw new AppError(500, 'Internal Server Error', error.message); 
+        throw error;
     }
 });
 
