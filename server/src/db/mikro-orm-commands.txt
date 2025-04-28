@@ -1,0 +1,8 @@
+Some commands used for database migrations. I couldn't get my typescript environment to work with ts-node so I switched to tsc, meaning that after every migration I would have to build, 
+then run the create, up, or down commands like so:
+
+npx mikro-orm migration:create --config ./dist/db/mikro-orm.config.js
+
+npx mikro-orm migration:down --config ./dist/db/mikro-orm.config.js    
+
+npx mikro-orm migration:up --config ./dist/db/mikro-orm.config.js    

@@ -29,5 +29,8 @@ export class Deposit {
   
     @Property({ onCreate: () => new Date() })
     createdAt = new Date();
+
+    @Property({ onUpdate: () => new Date() })
+    updatedAt = new Date();
 }
 
