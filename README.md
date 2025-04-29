@@ -36,19 +36,19 @@ A simple API to handle payment processing using Stripe, designed to accept depos
    Add the corresponding environment variables to your `.env` file.
 
 4. **Database Setup**
-   Using PostreSQL, create a database that matches the name in your `.env` file. There is a bash script that makes things easier since the project has to be compiled and run in a specific way.
-   First off:
-   ```bash
+    Using PostreSQL, create a database that matches the name in your `.env` file. There is a bash script that makes things easier since the project has to be compiled and run in a specific way.
+    First off:
+    ```bash
     # Setup permissions to be able to run
     chmod +x migrage.sh
     ```
     Then run these commands depending on what you want to do:
     ```bash
-    # To create the migration
+    # To create a migration
     ./migrage.sh create
-    # To run the migration
+    # To run migrations
     ./migrage.sh up
-    # To rollback the migration
+    # To rollback migrations
     ./migrage.sh down
     ```
 

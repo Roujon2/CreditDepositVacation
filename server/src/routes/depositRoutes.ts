@@ -4,6 +4,7 @@ import { validateBody } from '../middleware/validation';
 import { postDepositSchema } from './schema/depositSchema';
 import { formatSuccessResponse } from '../utils/responseFormat';
 import { Deposit } from '../types/deposit';
+import { withDbSession } from 'middleware/database';
 
 
 // Initialize the router
@@ -14,7 +15,7 @@ const deposits: Deposit[] = [];
 let depositIdCounter = 1; // Simple counter for deposit IDs
 
 // ------ POST /api/v1/deposit ------
-depositRouter.post('/', validateBody(postDepositSchema), (req: Request, res: Response) => {
+depositRouter.post('/', withDbSession, validateBody(postDepositSchema), (req: Request, res: Response) => {
     try {
         // Extract data from the request body
         const { guestName, guestEmail, checkInDate, checkOutDate, securityDeposit } = req.body;
