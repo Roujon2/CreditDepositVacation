@@ -33,18 +33,26 @@ A simple API to handle payment processing using Stripe, designed to accept depos
    cp .env.example .env
    ```
 
-   Add the following environment variables to your `.env` file:
-   ```env
-   SERVER_PORT=3000
-   SERVER_HOST=localhost
-   NODE_ENV=development
-   CORS_ORIGIN=*
-   STRIPE_API_SECRET=<your_stripe_secret_key>
-   STRIPE_API_KEY=<your_stripe_public_key>
-   ```
+   Add the corresponding environment variables to your `.env` file.
 
+4. **Database Setup**
+   Using PostreSQL, create a database that matches the name in your `.env` file. There is a bash script that makes things easier since the project has to be compiled and run in a specific way.
+   First off:
+   ```bash
+    # Setup permissions to be able to run
+    chmod +x migrage.sh
+    ```
+    Then run these commands depending on what you want to do:
+    ```bash
+    # To create the migration
+    ./migrage.sh create
+    # To run the migration
+    ./migrage.sh up
+    # To rollback the migration
+    ./migrage.sh down
+    ```
 
-4. **Run the application**:
+5. **Run the application**:
    Start the server by running:
    ```bash
    npm start
